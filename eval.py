@@ -37,7 +37,7 @@ def visit_and_seg(f, groups=[], datasets=[]):
     return groups, datasets
 
 with h5py.File(file, mode="r") as f:
-    with open('awake_csv', mode='w') as cs:
+    with open('awake_csv.csv', mode='w') as cs:
         fieldnames = ['Group', 'Subgroup', 'Name', 'Shape', 'Type', 'Size']
         writer = csv.DictWriter(cs, fieldnames=fieldnames)
         writer.writeheader()
