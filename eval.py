@@ -54,8 +54,8 @@ with h5py.File(file, mode="r") as f:
             shape = data.shape
             try:
                 dtype = data.dtype
-            except TypeError:
-                dtype = "Bytefield"
+            except Exception as ex:
+                dtype = '{0}'.format(ex.args).split(' ')[-2]
             size = data.size
             writer.writerow({'Group': group, 'Subgroup': subgroup, 'Name': name,
                    'Shape': shape, 'Type': dtype, 'Size': size})
