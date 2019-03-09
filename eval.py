@@ -63,11 +63,10 @@ with h5py.File(file, mode="r") as f:
     data1 = f.get("AwakeEventData/XMPP-STREAK/StreakImage/streakImageData")
     height = f.get("AwakeEventData/XMPP-STREAK/StreakImage/streakImageHeight")[0]
     width = f.get("AwakeEventData/XMPP-STREAK/StreakImage/streakImageWidth")[0]
-    data1 = np.reshape(data1, (-1, 2))
-    data1 = sig.medfilt(data1,3)
+    data_filt = sig.medfilt(np.reshape(data1, (height, width)))
+    cs.close()
     cs.close()
 f.close()
 
-plt.figure(figsize=(width/80, height/80))
-plt.imshow(data1, interpolation='nearest', aspect='auto')
+plt.imshow(data_filt, interpolation='nearest', aspect='auto')
 plt.savefig('awakefig.png')
